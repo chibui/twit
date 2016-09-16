@@ -16,7 +16,9 @@ gem 'coffee-rails', '~> 4.2'
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
 
-# Use devise - user auth
+# Use bootstrap-sass for css framework
+gem 'bootstrap-sass', '~> 3.3.6'
+# Use devise - user auth and management
 gem 'devise'
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
