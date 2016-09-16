@@ -16,6 +16,8 @@ gem 'coffee-rails', '~> 4.2'
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
 
+# Use acts_as_votable for likes and following
+gem 'acts_as_votable'
 # Use bootstrap-sass for css framework
 gem 'bootstrap-sass', '~> 3.3.6'
 # Use devise - user auth and management
