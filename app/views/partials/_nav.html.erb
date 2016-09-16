@@ -19,14 +19,20 @@
               <li>
                 <a href="#"> Tweet</a>
               </li>
-              <li>
-              <%= link_to('Logout', destroy_user_session_path, :method => :delete) %>
+
+              <li class="dropdown open">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true">Dropdown <span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                  <!-- shows current user email on edit link -->
+                  <li>
+                  <%= link_to(current_user.email, edit_user_registration_path) %>
+                  </li>
+                  <li role="separator" class="divider"></li>
+                  <li>
+                  <%= link_to('Logout', destroy_user_session_path, :method => :delete) %>
+                  </li>
+                </ul>
               </li>
-              <!-- shows current user email on edit link -->
-              <li>
-              <%= link_to(current_user.email, edit_user_registration_path) %>
-              </li>
-              
             <% else %>
               <li>
               <%= link_to('Login', new_user_session_path)  %>
