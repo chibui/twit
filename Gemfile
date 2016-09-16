@@ -16,6 +16,8 @@ gem 'coffee-rails', '~> 4.2'
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
 
+# Use font-awesome-rails to handle icon management
+gem "font-awesome-rails"
 # Use acts_as_votable for likes and following
 gem 'acts_as_votable'
 # Use bootstrap-sass for css framework
