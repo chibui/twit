@@ -2,38 +2,19 @@
 
 <h1>Tweets</h1>
 
-<table class="table">
-  <thead>
-    <tr>
-      <th>Message</th>
-      <th>User</th>
-      <th colspan="5"></th>
-    </tr>
-  </thead>
 
-  <tbody>
-    <% @tweets.each do |tweet| %>
-      <tr>
-        <td><%= linkify_hashtags(tweet.message)%></td>
-        <td><%= tweet.user.email %></td>
-        <td><%= link_to 'Show', tweet %></td>
-        <td><%= link_to 'Edit', edit_tweet_path(tweet) %></td>
-        <td><%= link_to 'Destroy', tweet, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-        <td>
-          <!-- condition to manage likes and display condition of like via a heart -->
-          <% if current_user %>
-            <%= link_to like_tweet_path(tweet), method: :put do %>
-              <%= current_user.voted_as_when_voted_for(tweet) == true ?fa_icon("heart") : fa_icon("heart-o") %>
-            <% end %>
-          <% else %>
-            <%= fa_icon("heart-o") %>
-          <% end %>
-        </td>
-        <td><%= tweet.score %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+	<div class="row">
+		<div class="span4 well col-sm-3" style="padding-bottom:0">
+            <form accept-charset="UTF-8" action="" method="POST">
+                <textarea class="span4" id="new_message" name="new_message"
+                placeholder="Type in your message" rows="5"></textarea>
+                <h6 class="pull-right">320 characters remaining</h6>
+                <button class="btn btn-info" type="submit">Post New Message</button>
+            </form>
+        </div>
+	</div>
+
+<div class="container-fluid">
 
 <% @tweets.each do |tweet| %>
 <div class="row">
@@ -43,17 +24,21 @@
         <ul>
           <h5><%= tweet.user.email %></h5>
           <%= linkify_hashtags(tweet.message)%>
-
+          <br>
           <% if current_user %>
             <%= link_to like_tweet_path(tweet), method: :put do %>
               <%= current_user.voted_as_when_voted_for(tweet) == true ?fa_icon("heart") : fa_icon("heart-o") %>
-
             <% end %>
           <% else %>
             <%= fa_icon("heart-o") %>
           <% end %>
         <%= tweet.score %>
-
+<br><br>
+        <% if current_user.id == tweet.user.id %>
+        <%= link_to 'Edit', edit_tweet_path(tweet) %>
+        <%= link_to 'Delete', tweet, method: :delete, data: { confirm: 'Are you sure?' } %>
+        <% else %>
+        <% end %>
         </ul>
       </div>
     </div>
@@ -62,5 +47,6 @@
 <% end %>
 
 <br>
+</div>
 
 <%= link_to 'New Tweet', new_tweet_path %>
