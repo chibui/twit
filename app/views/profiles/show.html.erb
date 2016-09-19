@@ -7,8 +7,39 @@
 
 <p>
   <strong>User:</strong>
-  <%= @profile.user %>
+  <%= @profile.user.email %>
+
 </p>
 
+<% @tweets.each do |tweets| %>
+<div class="row">
+  <div class="col-sm-3 center" >
+    <div class="thumbnail">
+      <div class="caption">
+        <ul>
+<%= tweets.message %>
+<br>
+<% if current_user %>
+  <%= link_to like_tweet_path(tweets), method: :put do %>
+    <%= current_user.voted_as_when_voted_for(tweets) == true ?fa_icon("heart") : fa_icon("heart-o") %>
+  <% end %>
+<% else %>
+  <%= fa_icon("heart-o") %>
+<% end %>
+<%= tweets.score %>
+<br><br>
+<% if current_user.id == tweets.user.id %>
+<%= link_to 'Edit', edit_tweet_path(tweets) %>
+<%= link_to 'Delete', tweets, method: :delete, data: { confirm: 'Are you sure?' } %>
+<% else %>
+<% end %>
+<br>
+</ul>
+</div>
+</div>
+</div>
+</div>
+
+<% end %>
 <%= link_to 'Edit', edit_profile_path(@profile) %> |
 <%= link_to 'Back', profiles_path %>

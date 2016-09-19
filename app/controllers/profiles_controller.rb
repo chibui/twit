@@ -1,6 +1,12 @@
 class ProfilesController < ApplicationController
-  before_action :set_profile, only: [:show, :edit, :update, :destroy]
+  before_action :set_profile, :set_tweets, only: [:show, :edit, :update, :destroy]
+  before_action :require_permission, only: [:edit, :update, :destroy]
 
+  def require_permission
+    if current_user != Profile.find(params[:id]).user
+      redirect_to profiles_path, notice: 'Profile is not yours.'
+    end
+  end
   # GET /profiles
   # GET /profiles.json
   def index
@@ -65,6 +71,10 @@ class ProfilesController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_profile
       @profile = Profile.find(params[:id])
+    end
+
+    def set_tweets
+      @tweets = Tweet.where(user_id: (Profile.find(params[:id]).user_id))
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
